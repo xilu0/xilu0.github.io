@@ -1,0 +1,74 @@
+[
+  {
+    "routeName": "B2",
+    "destination": "Yuen Long Station",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Yuen Long Station", "lat": 22.4461, "lng": 114.0352}
+    ],
+    "notes": "Intermediate stop data could not be retrieved."
+  },
+  {
+    "routeName": "B2P",
+    "destination": "Tin Tsz Estate",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Tin Tsz Estate", "lat": 22.4528, "lng": 114.0070}
+    ],
+    "notes": "Intermediate stop data could not be retrieved."
+  },
+  {
+    "routeName": "B2X",
+    "destination": "Tin Yiu Estate",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Tin Yiu Estate", "lat": 22.4498, "lng": 114.0034}
+    ],
+    "notes": "Intermediate stop data could not be retrieved. B2X is likely an express route."
+  },
+  {
+    "routeName": "B3",
+    "destination": "Tuen Mun Pier Head",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Tuen Mun Pier Head", "lat": 22.3722, "lng": 113.9661}
+    ],
+    "notes": "Intermediate stop data could not be retrieved."
+  },
+  {
+    "routeName": "B3A",
+    "destination": "Tuen Mun Shan King",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Shan King Estate (Approximate)", "lat": 22.3916, "lng": 113.9771}
+    ],
+    "notes": "Intermediate stop data could not be retrieved. Coordinates for Shan King Estate are an approximation."
+  },
+  {
+    "routeName": "B3M",
+    "destination": "Tuen Mun Station",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Tuen Mun Station", "lat": 22.3952, "lng": 113.9731}
+    ],
+    "notes": "Intermediate stop data could not be retrieved. Tuen Mun Station is an MTR station."
+  },
+  {
+    "routeName": "B3X",
+    "destination": "Tuen Mun Town Centre",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Tuen Mun Town Centre (Approximate)", "lat": 22.3916, "lng": 113.9771}
+    ],
+    "notes": "Intermediate stop data could not be retrieved. B3X is likely an express route. Coordinates for Tuen Mun Town Centre are an approximation."
+  },
+  {
+    "routeName": "Minibus 618",
+    "destination": "Tin Yan Estate",
+    "stops": [
+      {"name": "Shenzhen Bay Port (HK side)", "lat": 22.5039, "lng": 113.9447},
+      {"name": "Tin Yan Estate", "lat": 22.4631, "lng": 113.9960}
+    ],
+    "notes": "Intermediate stop data for minibuses is particularly difficult to find."
+  }
+]
