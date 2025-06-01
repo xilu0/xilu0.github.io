@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Routes from Shenzhen Bay Port to Hong Kong</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link rel="stylesheet" href="css/poole.css">
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <style>
+        html, body {height: 100%; margin: 0; padding: 0;}
+        #map { height: 500px; width: 100%; margin-bottom: 20px; }
+        /* h1 is already centered by poole.css if in container */
+        #route-list-info {
+          list-style-type: none;
+          padding: 0;
+          margin-top: 20px;
+        }
+        #route-list-info li {
+          margin-bottom: 8px;
+          padding: 8px;
+          background-color: #f9f9f9;
+          border-radius: 4px;
+        }
+        #route-list-info li:hover {
+          background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Bus Routes from Shenzhen Bay Port to Hong Kong</h1>
+    <div id="map"></div>
+    <ul id="route-list-info">
+      <!-- JS will populate this -->
+    </ul>
+  </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const map = L.map('map').setView([22.4, 114.0], 11);
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            const shenzhenBayPortCoords = [22.5039, 113.9447];
+            L.marker(shenzhenBayPortCoords)
+                .addTo(map)
+                .bindPopup('Shenzhen Bay Port (HK Side)');
+
+            const routeListULElement = document.getElementById('route-list-info');
+
+            fetch('bus_routes.json')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok ' + response.statusText);
+                    }
+                    return response.json();
+                })
+                .then(routes => {
+                    if (!routeListULElement) {
+                        console.error("Error: route-list-info element not found.");
+                        return;
+                    }
+                    routes.forEach(route => {
+                        // Add route to the list below the map
+                        routeListULElement.innerHTML += `<li><strong>${route.routeName}:</strong> ${route.destination} <small>(${route.notes || ''})</small></li>`;
+
+                        if (route.stops && route.stops.length > 1) {
+                            const origin = route.stops[0]; // Shenzhen Bay Port
+                            const destination = route.stops[route.stops.length - 1]; // Last stop is destination
+
+                            const originLatLng = [origin.lat, origin.lng];
+                            const destinationLatLng = [destination.lat, destination.lng];
+
+                            // Add marker for the destination
+                            L.marker(destinationLatLng)
+                                .addTo(map)
+                                .bindPopup(`${route.routeName}: ${destination.name}<br><small>${route.notes || ''}</small>`);
+
+                            // Draw a polyline (straight line)
+                            L.polyline([originLatLng, destinationLatLng], { color: 'blue' })
+                                .addTo(map)
+                                .bindPopup(`${route.routeName}`);
+                        } else {
+                            console.warn(`Route ${route.routeName} does not have enough stops to draw a line.`);
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error('Error fetching or processing bus routes data:', error);
+                    if (routeListULElement) {
+                        routeListULElement.innerHTML += `<li style="color: red;">Error loading bus routes.</li>`;
+                    }
+                });
+        });
+    </script>
+</body>
+</html>
